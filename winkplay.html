@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Center - Online Gaming Portal</title>
+    <meta name="description" content="Free online games portal with various fun games to enjoy during your leisure time.">
+    <meta name="keywords" content="online games, free games, browser games, racing games, arcade games">
+    <link rel="canonical" href="https://game-center.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --primary-hover: #3a56d4;
+            --secondary-color: #4cc9f0;
+            --secondary-hover: #3db9df;
+            --accent-color: #7209b7;
+            --accent-light: #9d4edd;
+            --accent-hover: #6a0dad;
+            --success-color: #10b981;
+            --error-color: #ef4444;
+            --warning-color: #f59e0b;
+            --background-light: #f8fafc;
+            --background-dark: #0f172a;
+            --text-dark: #1e293b;
+            --text-light: #f1f5f9;
+            --card-bg: #ffffff;
+            --card-bg-dark: #1e293b;
+            --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --card-shadow-dark: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+            --border-color: #e2e8f0;
+            --border-color-dark: #334155;
+            --sidebar-width: 250px;
+            --sidebar-collapsed-width: 60px;
+            --header-height: 3.5rem;
+            --transition-normal: all 0.3s ease;
+            
+            /* 新增渐变色彩 */
+            --gradient-blue: linear-gradient(135deg, #4361ee, #4cc9f0);
+            --gradient-purple: linear-gradient(135deg, #7209b7, #9d4edd);
+            --gradient-orange: linear-gradient(135deg, #ff8a00, #ff4757);
+            --gradient-green: linear-gradient(135deg, #0ba360, #3cba92);
+            --gradient-red: linear-gradient(135deg, #ff416c, #ff4b2b);
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: radial-gradient(circle at 10% 20%, rgb(239, 246, 249) 0%, rgb(206, 239, 253) 90%);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        body.dark-mode {
+            background: radial-gradient(circle at 10% 20%, rgb(21, 30, 63) 0%, rgb(11, 31, 62) 90%);
+            color: var(--text-light);
+        }
+        
+        body.dark-mode .header-container,
+        body.dark-mode .sidebar {
+            background-color: var(--card-bg-dark);
+            border-color: var(--border-color-dark);
+        }
+        
+        body.dark-mode .card {
+            background-color: var(--card-bg-dark);
+            border-color: var(--border-color-dark);
+            box-shadow: var(--card-shadow-dark);
+        }
+        
+        body.dark-mode .menu-category {
+            color: var(--text-light);
+        }
+        
+        body.dark-mode .menu-item {
+            color: var(--text-light);
+        }
+        
+        body.dark-mode .menu-item:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        body.dark-mode .menu-item.active {
+            background-color: rgba(67, 97, 238, 0.2);
+        }
+        
+        body.dark-mode .game-tab {
+            background-color: rgba(26, 32, 44, 0.8);
+            border-color: rgba(0, 0, 0, 0.3);
+        }
+        
+        body.dark-mode .game-tab:hover {
+            background-color: rgba(26, 32, 44, 1);
+        }
+        
+        body.dark-mode .feature-icon {
+            background-color: rgba(67, 97, 238, 0.2);
+        }
+        
+        body.dark-mode .game-container {
+            background-color: #2d3748;
+            border-color: var(--border-color-dark);
+        }
+        
+        body.dark-mode .game-description {
+            color: var(--text-light);
+        }
+        
+        body.dark-mode .game-description div {
+            background-color: var(--card-bg-dark);
+            border-color: var(--border-color-dark);
+        }
+        
+        body.dark-mode .section-title {
+            color: var(--text-light);
+        }
+        
+        body.dark-mode h1, 
+        body.dark-mode h2, 
+        body.dark-mode h3, 
+        body.dark-mode h4 {
+            color: var(--text-light);
+        }
+        
+        body.dark-mode .text-gray-600,
+        body.dark-mode .text-gray-700,
+        body.dark-mode .text-gray-900 {
+            color: #cbd5e1 !important;
+        }
+        
+        body.dark-mode .bg-gray-50,
+        body.dark-mode .bg-gray-100 {
+            background-color: #2d3748 !important;
+        }
+        
+        body.dark-mode .calculator-display {
+            background-color: #1a202c;
+        }
+        
+        body.dark-mode .calc-btn {
+            background-color: #2d3748;
+            color: var(--text-light);
+        }
+        
+        body.dark-mode .calc-btn:hover {
+            background-color: #4a5568;
+        }
+        
+        /* 顶部导航栏 */
+        .header-container {
+            background: var(--gradient-blue);
+            box-shadow: var(--card-shadow);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            padding: 0.5rem 0;
+            transition: transform 0.3s ease;
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+        }
+        
+        .header-hidden {
+            transform: translateY(-100%);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 3rem;
+            width: 100%;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            transition: var(--transition-normal);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .logo-text:hover {
+            transform: translateY(-2px);
+        }
+        
+        .logo-icon {
+            margin-right: 0.5rem;
+            font-size: 1.5rem;
+            color: white;
+            animation: pulse 2s infinite;
+        }
+        
+        /* 侧边栏和主内容布局 */
+        .main-layout {
+            display: flex;
+            margin-top: var(--header-height);
+            flex: 1;
+        }
+        
+        .sidebar {
+            width: var(--sidebar-width);
+            background-image: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.8) 100%);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(255,255,255,0.3);
+            position: fixed;
+            top: var(--header-height);
+            bottom: 0;
+            left: 0;
+            overflow-y: auto;
+            transition: var(--transition-normal);
+            z-index: 40;
+            box-shadow: 1px 0 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .sidebar.collapsed {
+            width: 70px;
+        }
+        
+        .sidebar.collapsed .menu-category {
+            text-align: center;
+            padding: 0.5rem;
+            justify-content: center;
+        }
+        
+        .sidebar.collapsed .category-icon,
+        .sidebar.collapsed .menu-text {
+            display: none;
+        }
+        
+        .sidebar.collapsed .menu-title {
+            display: none;
+        }
+        
+        .sidebar.collapsed .menu-item {
+            justify-content: center;
+            padding: 0.85rem 0;
+            margin: 0.25rem auto;
+            border-left: none;
+            width: 85%;
+        }
+        
+        .sidebar.collapsed .menu-icon {
+            margin-right: 0;
+        }
+        
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            transition: var(--transition-normal);
+            padding-bottom: 2rem;
+        }
+        
+        .main-content.expanded {
+            margin-left: 70px;
+        }
+        
+        /* 侧边栏菜单 */
+        .sidebar-menu {
+            padding: 1rem 0;
+        }
+        
+        .menu-category {
+            padding: 0.5rem 1rem;
+            color: var(--primary-color);
+            opacity: 0.9;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 1rem;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .menu-category::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 25%;
+            height: 2px;
+            background: var(--gradient-blue);
+            border-radius: 2px;
+        }
+        
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 0.85rem 1rem;
+            color: var(--text-dark);
+            transition: var(--transition-normal);
+            cursor: pointer;
+            border-left: 3px solid transparent;
+            margin: 0.25rem 0;
+            border-radius: 0 10px 10px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+        
+        .menu-item:hover::before {
+            opacity: 0.1;
+        }
+        
+        .menu-item:hover {
+            background-color: rgba(67, 97, 238, 0.05);
+            transform: translateX(5px);
+        }
+        
+        .menu-item.active {
+            background: linear-gradient(90deg, rgba(67, 97, 238, 0.1) 0%, rgba(67, 97, 238, 0.05) 100%);
+            border-left-color: var(--primary-color);
+            color: var(--primary-color);
+            font-weight: 600;
+            box-shadow: 0 4px 8px -2px rgba(67, 97, 238, 0.15);
+        }
+        
+        .menu-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: inherit;
+            transition: transform 0.3s ease;
+            background: rgba(67, 97, 238, 0.1);
+            border-radius: 8px;
+            padding: 0.5rem;
+        }
+        
+        .menu-item:hover .menu-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .menu-item.active .menu-icon {
+            background: var(--gradient-blue);
+            color: white;
+            box-shadow: 0 4px 8px -2px rgba(67, 97, 238, 0.25);
+        }
+        
+        /* 顶部按钮和操作区 */
+        .top-actions {
+            display: flex;
+            align-items: center;
+        }
+        
+        .action-button {
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            margin-right: 1rem;
+            cursor: pointer;
+            font-size: 1.25rem;
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-normal);
+        }
+        
+        .action-button:hover {
+            background-color: rgba(67, 97, 238, 0.1);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            margin-right: 1rem;
+            cursor: pointer;
+            font-size: 1.25rem;
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-normal);
+        }
+        
+        .theme-toggle:hover {
+            background-color: rgba(67, 97, 238, 0.1);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        
+        .sidebar-toggle {
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            margin-right: 1rem;
+            cursor: pointer;
+            font-size: 1.25rem;
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-normal);
+        }
+        
+        .sidebar-toggle:hover {
+            background-color: rgba(67, 97, 238, 0.1);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        
+        .user-menu {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 0.25rem 0.5rem;
+            border-radius: 2rem;
+            transition: var(--transition-normal);
+        }
+        
+        .user-menu:hover {
+            background-color: rgba(67, 97, 238, 0.05);
+            transform: translateY(-2px);
+        }
+        
+        .user-avatar {
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 模块内容容器 */
+        .module-container {
+            padding: 1.5rem;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .module-container.active {
+            display: block;
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -0.5rem;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 1.5px;
+        }
+        
+        /* 游戏模块样式 */
+        .game-layout {
+            display: flex;
+            margin-top: 1rem;
+            gap: 2rem;
+        }
+        
+        .game-sidebar {
+            width: 250px;
+            flex-shrink: 0;
+        }
+        
+        .game-content-area {
+            flex: 1;
+        }
+        
+        .game-tabs {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .game-tab {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.25rem;
+            border-radius: 12px;
+            background-color: rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px -3px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 0.75rem;
+            text-decoration: none;
+        }
+        
+        .game-tab.active {
+            background: var(--gradient-purple);
+        }
+        
+        .game-tab.active span {
+            color: white;
+        }
+        
+        .game-tab span {
+            display: none;
+        }
+        
+        .game-icon-wrapper {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            border-radius: 8px;
+            margin-right: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient-blue);
+            color: white;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            z-index: 2;
+            pointer-events: none;
+        }
+        
+        .game-tab img {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            margin-right: 1rem;
+            object-fit: cover;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #f0f0f0;
+            transition: all 0.3s ease;
+        }
+        
+        .game-content {
+            margin-bottom: 2rem;
+            animation: fadeIn 0.4s ease;
+        }
+        
+        .game-content.hidden {
+            display: none !important;
+        }
+        
+        .game-frame-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: var(--card-shadow);
+            transition: all 0.4s ease;
+        }
+        
+        .game-frame-container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .loading-spinner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            z-index: 20;
+        }
+        
+        .spinner-icon {
+            width: 80px;
+            height: 80px;
+            border: 5px solid rgba(67, 97, 238, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            border-left-color: var(--secondary-color);
+            animation: spin 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loading-spinner p {
+            font-weight: 600;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+        
+        body.dark-mode .loading-spinner {
+            background: rgba(15, 23, 42, 0.9);
+        }
+        
+        body.dark-mode .loading-spinner p {
+            color: var(--secondary-color);
+        }
+        
+        .game-error {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            text-align: center;
+            z-index: 20;
+            backdrop-filter: blur(5px);
+        }
+        
+        .retry-button {
+            margin-top: 1.5rem;
+            padding: 0.85rem 2.5rem;
+            background: var(--gradient-blue);
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 10px 20px -5px rgba(67, 97, 238, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .retry-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.6s ease;
+        }
+        
+        .retry-button:hover::before {
+            left: 100%;
+        }
+        
+        .retry-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px -5px rgba(67, 97, 238, 0.5);
+        }
+        
+        .retry-button:active {
+            transform: translateY(0);
+            box-shadow: 0 5px 15px -5px rgba(67, 97, 238, 0.3);
+        }
+        
+        body.dark-mode .game-error {
+            background-color: rgba(15, 23, 42, 0.95);
+        }
+        
+        body.dark-mode .game-frame-container {
+            background-color: rgba(26, 32, 44, 0.9);
+            border-color: rgba(0, 0, 0, 0.3);
+        }
+        
+        /* 响应式设计 - 游戏模块 */
+        @media (max-width: 768px) {
+            .game-tab {
+                padding: 0.75rem;
+                font-size: 0.9rem;
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .game-tab-icon {
+                margin-right: 0;
+                margin-bottom: 0.5rem;
+                width: 1.5rem;
+                height: 1.5rem;
+            }
+            
+            .game-description {
+                font-size: 0.95rem;
+            }
+            
+            #theme-toggle {
+                width: 40px;
+                height: 40px;
+            }
+        }
+        
+        /* 卡片样式增强 */
+        .card {
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 按钮样式增强 */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.6rem 1.5rem;
+            font-weight: 500;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: none;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+            color: white;
+            box-shadow: 0 4px 6px rgba(67, 97, 238, 0.25);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(67, 97, 238, 0.3);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--secondary-color), var(--secondary-hover));
+            color: white;
+            box-shadow: 0 4px 6px rgba(76, 201, 240, 0.25);
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(76, 201, 240, 0.3);
+        }
+        
+        .btn-accent {
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-light));
+            color: white;
+            box-shadow: 0 4px 6px rgba(114, 9, 183, 0.25);
+        }
+        
+        .btn-accent:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(114, 9, 183, 0.3);
+        }
+        
+        .btn-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* 特殊组件样式 */
+        .feature-icon {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .quick-access-item {
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+        
+        .quick-access-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .quick-access-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .quick-access-item:hover .quick-access-icon {
+            transform: scale(1.1) translateY(-3px);
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 1024px) {
+            .sidebar-toggle {
+                display: block;
+            }
+            
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .sidebar.sidebar-mobile-active {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            /* 在移动设备上覆盖收缩样式 */
+            .sidebar-collapsed {
+                transform: translateX(-100%);
+                width: 250px; /* 重置宽度 */
+            }
+            
+            .sidebar-collapsed.sidebar-mobile-active {
+                transform: translateX(0);
+            }
+            
+            .main-content-collapsed {
+                margin-left: 0;
+            }
+            
+            .sidebar-collapsed .menu-text,
+            .sidebar-collapsed .menu-badge,
+            .sidebar-collapsed .menu-category {
+                display: block; /* 移动设备上保持文字可见 */
+            }
+            
+            .sidebar-collapsed .menu-item {
+                padding: 0.75rem 1rem;
+                justify-content: flex-start;
+            }
+            
+            .sidebar-collapsed .menu-icon {
+                margin-right: 0.75rem;
+                font-size: inherit;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .game-layout {
+                flex-direction: column;
+            }
+            
+            .game-sidebar {
+                width: 100%;
+            }
+            
+            .game-tabs {
+                flex-direction: row;
+                overflow-x: auto;
+                padding-bottom: 1rem;
+            }
+            
+            .game-tab {
+                white-space: nowrap;
+                flex: 0 0 auto;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* 网站加载效果 */
+        body:not(.loaded) .module-container,
+        body:not(.loaded) .sidebar {
+            opacity: 0;
+        }
+        
+        body.loaded .module-container,
+        body.loaded .sidebar {
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+        
+        .game-description {
+            color: var(--text-dark);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+        
+        .game-description div {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            overflow: hidden;
+        }
+        
+        .game-description div:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .game-description h4 {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        
+        .game-description h4::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--gradient-blue);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+        
+        .game-description div:hover h4::after {
+            width: 100%;
+        }
+        
+        body.dark-mode .game-description div {
+            background: rgba(26, 32, 44, 0.8);
+            border-color: rgba(0, 0, 0, 0.3);
+        }
+        
+        /* 主题切换按钮美化 */
+        #theme-toggle {
+            position: relative;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            transform-style: preserve-3d;
+            perspective: 800px;
+        }
+        
+        #theme-toggle:hover {
+            transform: translateY(-3px) rotateY(15deg);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        #theme-toggle i {
+            transition: all 0.5s ease;
+            backface-visibility: hidden;
+        }
+        
+        body.dark-mode #theme-toggle {
+            background: rgba(0, 0, 0, 0.2);
+            border-color: rgba(0, 0, 0, 0.3);
+        }
+        
+        /* 添加背景装饰元素 */
+        .bg-decoration {
+            position: fixed;
+            z-index: -1;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        
+        .bg-decoration:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(76, 201, 240, 0.2) 0%, rgba(76, 201, 240, 0) 70%);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .bg-decoration:nth-child(2) {
+            bottom: 10%;
+            right: 5%;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(114, 9, 183, 0.2) 0%, rgba(114, 9, 183, 0) 70%);
+            border-radius: 50%;
+            animation: float 12s ease-in-out infinite;
+        }
+        
+        .bg-decoration:nth-child(3) {
+            top: 60%;
+            left: 50%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255, 138, 0, 0.15) 0%, rgba(255, 138, 0, 0) 70%);
+            border-radius: 50%;
+            animation: float 10s ease-in-out infinite;
+        }
+        
+        /* 光晕效果 */
+        .glow-effect {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glow-effect::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+            opacity: 0;
+            transform: rotate(30deg);
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            pointer-events: none;
+        }
+        
+        .glow-effect:hover::after {
+            opacity: 1;
+            transform: rotate(0deg);
+        }
+        
+        /* 动画效果 */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* 游戏容器样式 */
+        .game-container {
+            flex: 1;
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            min-height: 600px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        body.dark-mode .game-container {
+            background-color: var(--card-bg-dark);
+            border-color: var(--border-color-dark);
+            box-shadow: var(--card-shadow-dark);
+        }
+        
+        #game-content {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            min-height: 550px;
+        }
+        
+        #game-iframe {
+            border: none;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+        
+        body.dark-mode #game-iframe {
+            background-color: #1e293b;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .game-tab:hover .game-icon-wrapper {
+            transform: scale(1.1);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .game-tab.active .game-icon-wrapper {
+            background: var(--gradient-purple);
+        }
+        
+        .game-title {
+            font-weight: 600;
+            font-size: 1rem;
+            z-index: 2;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .game-tab.active .game-title {
+            color: white;
+        }
+        
+        /* 删除折叠菜单样式，保留以下内容 */
+        .collapsible-trigger {
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        body.dark-mode .collapsible-trigger {
+            color: var(--text-light);
+        }
+        
+        /* 折叠按钮样式 */
+        .collapse-sidebar-btn {
+            position: relative;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--gradient-blue);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            float: right;
+            margin-top: -2px;
+        }
+        
+        .collapse-sidebar-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+        
+        .sidebar.collapsed .collapse-sidebar-btn {
+            transform: rotate(180deg);
+        }
+        
+        .sidebar.collapsed .collapse-sidebar-btn:hover {
+            transform: rotate(180deg) scale(1.1);
+        }
+        
+        body.dark-mode .collapse-sidebar-btn {
+            background: var(--gradient-purple);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- 背景装饰元素 -->
+    <div class="bg-decoration"></div>
+    <div class="bg-decoration"></div>
+    <div class="bg-decoration"></div>
+    
+    <!-- 顶部导航栏 -->
+    <header class="header-container">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="nav-container">
+                <div class="flex items-center">
+                    <a href="#" class="logo-text">
+                        <i class="fas fa-gamepad logo-icon"></i>
+                        <span>Game Center</span>
+                    </a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <button id="sidebar-toggle" class="lg:hidden p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    
+                    <button id="theme-toggle" class="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 主布局：侧边栏 + 内容区 -->
+    <div class="main-layout">
+        <!-- 侧边栏 -->
+        <aside id="sidebar" class="sidebar">
+            <div class="sidebar-inner">
+                <div class="sidebar-content">
+                    <div class="menu-container">
+                        <div class="menu-section">
+                            <h3 class="menu-category">
+                                Game Categories
+                                <div class="collapse-sidebar-btn" id="collapse-sidebar">
+                                    <i class="fas fa-chevron-left"></i>
+                                </div>
+                            </h3>
+                            <div class="menu-items">
+                                <a href="#racing" class="menu-item active" data-game-category="racing">
+                                    <i class="fas fa-car-side menu-icon"></i>
+                                    <span class="menu-text">Racing Games</span>
+                                </a>
+                                <a href="#arcade" class="menu-item" data-game-category="arcade">
+                                    <i class="fas fa-hat-wizard menu-icon"></i>
+                                    <span class="menu-text">Arcade Games</span>
+                                </a>
+                                <a href="#adventure" class="menu-item" data-game-category="adventure">
+                                    <i class="fas fa-mountain menu-icon"></i>
+                                    <span class="menu-text">Adventure Games</span>
+                                </a>
+                                <a href="#action" class="menu-item" data-game-category="action">
+                                    <i class="fas fa-bolt menu-icon"></i>
+                                    <span class="menu-text">Action Games</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- 游戏模块 -->
+            <div class="module-container active" id="game-module">
+                <div class="game-layout">
+                    <div class="game-sidebar">
+                        <div class="card">
+                            <h3 class="font-bold mb-3 text-lg">Games</h3>
+                            <div class="flex flex-row md:flex-col gap-2">
+                                <div class="game-tab glow-effect active" data-game="racing">
+                                    <div class="game-icon-wrapper">
+                                        <i class="fas fa-motorcycle"></i>
+                                    </div>
+                                    <div class="game-title">Moto X3M</div>
+                                </div>
+                                <div class="game-tab glow-effect" data-game="slope">
+                                    <div class="game-icon-wrapper">
+                                        <i class="fas fa-mountain"></i>
+                                    </div>
+                                    <div class="game-title">Slope</div>
+                                </div>
+                                <div class="game-tab glow-effect" data-game="subway">
+                                    <div class="game-icon-wrapper">
+                                        <i class="fas fa-subway"></i>
+                                    </div>
+                                    <div class="game-title">Subway Surfers</div>
+                                </div>
+                                <div class="game-tab glow-effect" data-game="count">
+                                    <div class="game-icon-wrapper">
+                                        <i class="fas fa-car"></i>
+                                    </div>
+                                    <div class="game-title">Racing Builder</div>
+                                </div>
+                                <div class="game-tab glow-effect" data-game="temple">
+                                    <div class="game-icon-wrapper">
+                                        <i class="fas fa-running"></i>
+                                    </div>
+                                    <div class="game-title">Temple Run 2</div>
+                                </div>
+                                <div class="game-tab glow-effect" data-game="stickman">
+                                    <div class="game-icon-wrapper">
+                                        <i class="fas fa-dot-circle"></i>
+                                    </div>
+                                    <div class="game-title">Snake Shooter</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-container">
+                        <div id="game-content" class="relative w-full">
+                            <div id="loading-spinner" class="loading-spinner flex flex-col items-center justify-center">
+                                <div class="spinner-icon mb-2"></div>
+                                <p class="text-sm">Loading game...</p>
+                            </div>
+                            <div id="error-message" class="game-error bg-white dark:bg-gray-800 flex-col">
+                                <p class="mb-2">Failed to load game</p>
+                                <button id="retry-button" class="retry-button">Retry</button>
+                            </div>
+                            <iframe id="game-iframe" 
+                                frameborder="0"
+                                scrolling="no"
+                                style="width: 100%; height: 100%; min-height: 550px; border: none; display: none; background: transparent;"
+                                allow="gamepad *; fullscreen; autoplay; clipboard-write; encrypted-media; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- CrazyGames SDK --> 
+    <script src="https://sdk.crazygames.com/crazygames-sdk-v2.js"></script>
+    <script>
+        let crazysdk;
+        
+        window.addEventListener('load', function() {
+            crazysdk = window.CrazyGames.CrazySDK.getInstance();
+            crazysdk.init();
+        });
+    </script>
+
+    <script>
+        // 游戏URL映射
+        const gameIframes = {
+            'racing': 'https://games.crazygames.com/en_US/moto-x3m/index.html',
+            'slope': 'https://games.crazygames.com/en_US/slope/index.html',
+            'subway': 'https://games.crazygames.com/en_US/subway-surfers/index.html',
+            'count': 'https://www.crazygames.com/embed/racing-builder',
+            'temple': 'https://games.crazygames.com/en_US/temple-run-2/index.html',
+            'stickman': 'https://www.crazygames.com/embed/snake-shooter-cbu'
+        };
+
+        // 页面初始设置
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.classList.add('loaded');
+            
+            // 检查本地存储中的主题设置
+            const darkModeStored = localStorage.getItem('darkMode') === 'true';
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = themeToggle ? themeToggle.querySelector('i') : null;
+            
+            // 应用保存的主题设置
+            if (darkModeStored) {
+                document.body.classList.add('dark-mode');
+                if (themeIcon) {
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-sun');
+                }
+            }
+            
+            // 处理导航栏滚动显示/隐藏
+            const header = document.querySelector('.header-container');
+            let lastScrollTop = 0;
+            
+            window.addEventListener('scroll', function() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                // 向下滚动超过50px时隐藏导航栏
+                if (scrollTop > lastScrollTop && scrollTop > 50) {
+                    header.classList.add('header-hidden');
+                } 
+                // 向上滚动时显示导航栏
+                else if (scrollTop < lastScrollTop) {
+                    header.classList.remove('header-hidden');
+                }
+                
+                lastScrollTop = scrollTop;
+            });
+            
+            // 侧边栏切换
+            const sidebarToggle = document.getElementById('sidebar-toggle');
+            const sidebar = document.getElementById('sidebar');
+            
+            if (sidebarToggle && sidebar) {
+                sidebarToggle.addEventListener('click', function() {
+                    sidebar.classList.toggle('sidebar-mobile-active');
+                });
+            }
+            
+            // 主题切换
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function() {
+                    document.body.classList.toggle('dark-mode');
+                    const isDarkMode = document.body.classList.contains('dark-mode');
+                    
+                    // 更新图标
+                    if (isDarkMode) {
+                        themeIcon.classList.remove('fa-moon');
+                        themeIcon.classList.add('fa-sun');
+                    } else {
+                        themeIcon.classList.remove('fa-sun');
+                        themeIcon.classList.add('fa-moon');
+                    }
+                    
+                    // 保存设置到本地存储
+                    localStorage.setItem('darkMode', isDarkMode);
+                });
+            }
+            
+            // 游戏标签切换功能
+            const gameTabs = document.querySelectorAll('.game-tab');
+            
+            gameTabs.forEach(tab => {
+                tab.addEventListener('click', function(event) {
+                    // 阻止事件冒泡和默认行为
+                    event.preventDefault();
+                    event.stopPropagation();
+                    
+                    const gameId = this.getAttribute('data-game');
+                    console.log('游戏标签点击:', gameId);
+                    
+                    // 切换标签活动状态
+                    document.querySelectorAll('.game-tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 加载游戏
+                    loadGame(gameId);
+                });
+            });
+            
+            // 侧边栏折叠功能
+            const collapseBtn = document.getElementById('collapse-sidebar');
+            const menuCategory = document.querySelector('.menu-category');
+            
+            if (collapseBtn && sidebar) {
+                collapseBtn.addEventListener('click', function(e) {
+                    e.stopPropagation(); // 防止事件冒泡到菜单类别
+                    toggleSidebar();
+                });
+                
+                // 也允许点击标题来折叠
+                if (menuCategory) {
+                    menuCategory.addEventListener('click', function(e) {
+                        // 如果点击的是按钮内部或按钮本身，不处理
+                        if (e.target.closest('.collapse-sidebar-btn')) {
+                            return;
+                        }
+                        toggleSidebar();
+                    });
+                }
+            }
+            
+            // 重试按钮点击事件
+            const retryButton = document.getElementById('retry-button');
+            if (retryButton) {
+                retryButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log('重试按钮点击');
+                    const activeTab = document.querySelector('.game-tab.active');
+                    if (activeTab) {
+                        const gameId = activeTab.getAttribute('data-game');
+                        loadGame(gameId);
+                    }
+                });
+            }
+            
+            // 初始加载第一个游戏
+            console.log('加载初始游戏');
+            loadGame('racing');
+        });
+
+        // 加载游戏函数
+        function loadGame(gameKey) {
+            console.log('加载游戏:', gameKey);
+            
+            // 获取元素
+            const loadingSpinner = document.getElementById('loading-spinner');
+            const errorMessage = document.getElementById('error-message');
+            const iframe = document.getElementById('game-iframe');
+            const gameContainer = document.querySelector('.game-container');
+            
+            if (!iframe) {
+                console.error('未找到iframe元素');
+                return;
+            }
+            
+            // 检查游戏是否存在
+            if (!gameIframes[gameKey]) {
+                console.error('未找到游戏URL:', gameKey);
+                if (errorMessage) errorMessage.style.display = 'flex';
+                if (loadingSpinner) loadingSpinner.style.display = 'none';
+                return;
+            }
+            
+            // 显示加载中
+            if (loadingSpinner) loadingSpinner.style.display = 'flex';
+            if (errorMessage) errorMessage.style.display = 'none';
+            iframe.style.display = 'none';
+            
+            try {
+                // 确保移除旧的iframe内容
+                iframe.src = 'about:blank';
+                
+                // 短暂延迟后设置新的源
+                setTimeout(function() {
+                    // 设置iframe源
+                    iframe.src = gameIframes[gameKey];
+                    
+                    // 监听iframe加载完成
+                    iframe.onload = function() {
+                        if (loadingSpinner) loadingSpinner.style.display = 'none';
+                        iframe.style.display = 'block';
+                        console.log('游戏加载完成');
+                        
+                        // 通知CrazyGames SDK游戏已加载完成
+                        if (window.CrazyGames && window.CrazyGames.CrazySDK) {
+                            try {
+                                const crazysdk = window.CrazyGames.CrazySDK.getInstance();
+                                crazysdk.gameplayStart();
+                            } catch (e) {
+                                console.error('CrazyGames SDK 错误:', e);
+                            }
+                        }
+                    };
+                    
+                    // 设置加载超时，避免长时间卡在加载状态
+                    setTimeout(function() {
+                        if (loadingSpinner && loadingSpinner.style.display !== 'none') {
+                            loadingSpinner.style.display = 'none';
+                            iframe.style.display = 'block';
+                            console.log('游戏加载超时，强制显示');
+                        }
+                    }, 8000); // 8秒超时
+                }, 100); // 100毫秒延迟
+            } catch (error) {
+                console.error('加载游戏错误:', error);
+                if (errorMessage) errorMessage.style.display = 'flex';
+                if (loadingSpinner) loadingSpinner.style.display = 'none';
+            }
+        }
+
+        // 折叠侧边栏的功能
+        function toggleSidebar() {
+            sidebar.classList.toggle('collapsed');
+            document.querySelector('.main-content').classList.toggle('expanded');
+        }
+    </script>
+</body>
+</html> 
